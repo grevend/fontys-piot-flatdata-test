@@ -64,10 +64,8 @@ async function computeSignature(data: string, key: CryptoKey): Promise<SignedReq
 
 (async function () {
     const filename = Deno.args[0]
+    const message = "signature"
 
-    console.log(Deno.env.get('TEST'))
-
-    /*const message = "signature"
     const key = await importSigningKey(Deno.env.get('COLLECTOR_KEY') || "")
     const signed = await computeSignature(message, key)
     const encoded = SocketMessage.encode({ event: 'collect', payload: signed })
@@ -81,5 +79,5 @@ async function computeSignature(data: string, key: CryptoKey): Promise<SignedReq
             writeJSON(filename, msg)
             ws.close()
         })
-    })*/
+    })
 })()

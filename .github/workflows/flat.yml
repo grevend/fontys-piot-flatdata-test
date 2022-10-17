@@ -4,13 +4,13 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
   schedule:
     - cron: '*/30 * * * *'
 
 env:
+  SERVICE_URL: ${{ secrets.SERVICE_URL }}
   DEVICE_ID: ${{ secrets.DEVICE_ID }}
-  TEST: ${{ secrets.TEST }}
+  COLLECTOR_KEY: ${{ secrets.COLLECTOR_KEY }}
 
 jobs:
   scheduled:
