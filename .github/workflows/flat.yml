@@ -8,6 +8,10 @@ on:
   schedule:
     - cron: '*/30 * * * *'
 
+env:
+  DEVICE_ID: ${{ secrets.DEVICE_ID }}
+  TEST: ${{ secrets.TEST }}
+
 jobs:
   scheduled:
     runs-on: ubuntu-latest
