@@ -26,4 +26,4 @@ jobs:
         with:
           http_url: 'https://raw.githubusercontent.com/grevend/fontys-piot-flatdata-test/main/.github/placeholder/empty.json'
           downloaded_filename: 'data.json'
-          postprocessing: 'postprocessing.ts'
+          postprocess: 'postprocessing.ts'
