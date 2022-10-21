@@ -84,3 +84,4 @@ async function computeSignature(data: string, key: CryptoKey): Promise<SignedReq
         })
     })
 })()
+
