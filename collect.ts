@@ -73,6 +73,9 @@ async function computeSignature(data: string, key: CryptoKey): Promise<SignedReq
     const ws = new WebSocket(Deno.env.get('SERVICE_URL') || "")
     ws.onopen = (_ => {
         ws.send(encoded)
+
+        setTimeout(() => ws.close(), 750)
+
         ws.onmessage = (async ({ data }) => {
             const msg = SocketMessage.fromBuffer(await (data as Blob).arrayBuffer()).payload
             console.log(msg)
