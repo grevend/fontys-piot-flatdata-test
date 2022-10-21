@@ -74,7 +74,7 @@ async function computeSignature(data: string, key: CryptoKey): Promise<SignedReq
     ws.onopen = (_ => {
         ws.send(encoded)
 
-        setTimeout(() => ws.close(), 750)
+        setTimeout(() => ws.close(), 57500)
 
         ws.onmessage = (async ({ data }) => {
             const msg = SocketMessage.fromBuffer(await (data as Blob).arrayBuffer()).payload
