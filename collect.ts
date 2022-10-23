@@ -75,7 +75,7 @@ async function computeSignature(data: string, key: CryptoKey): Promise<SignedReq
     ws.onopen = (_ => {
         ws.send(encoded)
 
-        setTimeout(() => {
+        const id = setTimeout(() => {
             console.log('Timeout...')
             console.log(content)
             writeJSON(filename, content)
@@ -84,6 +84,7 @@ async function computeSignature(data: string, key: CryptoKey): Promise<SignedReq
 
         ws.onmessage = (async ({ data }) => {
             const msg = SocketMessage.fromBuffer(await (data as Blob).arrayBuffer()).payload
+            clearTimeout(id);
             console.log("Found...")
             console.log(msg)
             writeJSON(filename, msg)
