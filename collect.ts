@@ -64,7 +64,7 @@ async function computeSignature(data: string, key: CryptoKey): Promise<SignedReq
 
 (async function () {
     const filename = Deno.args[0]
-    const content = await readJSON(filename)
+    const content = await readJSON('data.json')
     const message = "signature"
 
     const key = await importSigningKey(Deno.env.get('COLLECTOR_KEY') || "")
