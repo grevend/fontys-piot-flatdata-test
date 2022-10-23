@@ -1,6 +1,7 @@
 import { SocketMessage } from "https://raw.githubusercontent.com/duart38/serverless-sockets/main/src/mod.ts";
 import { readJSON, writeImage, writeJSON } from "https://deno.land/x/flat@0.0.15/mod.ts"
 import { decode } from "https://deno.land/std@0.160.0/encoding/base64.ts"
+import { exec } from "https://deno.land/x/exec/mod.ts"
 
 type Signed = {
     signature: number[],
@@ -92,7 +93,8 @@ type Collected = Omit<Data, "signature" | "sigMsg" | "deviceId" | "to">
 async function transform(input: Data): Promise<Collected> {
     return {...input, plants: await Promise.all(input.plants.map(async (plant, idx) => {
         if(plant.image !== undefined) {
-            await writeImage(decode(plant.image.replace(/^data:image\/png;base64,/, "")), `plant-${idx}.png`)
+            await writeImage(decode(plant.image.replace(/^data:image\/png;base64,/, "")), `plant-${idx + 1}.png`)
+            await exec(`squoosh-cli --max-optimizer-rounds 10 --webp auto plant-${idx + 1}.png`)
         }
         return ({
             ...plant, image: undefined
