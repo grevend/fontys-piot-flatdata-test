@@ -1,5 +1,5 @@
 import { SocketMessage } from "https://raw.githubusercontent.com/duart38/serverless-sockets/main/src/mod.ts";
-import { readJSON, writeJSON } from "https://deno.land/x/flat@0.0.15/mod.ts"
+import { readJSON, writeJSON, writeTXT } from "https://deno.land/x/flat@0.0.15/mod.ts"
 
 type Signed = {
     signature: number[],
@@ -62,6 +62,35 @@ async function computeSignature(data: string, key: CryptoKey): Promise<SignedReq
     }
 }
 
+interface Data {
+    roomTemp: number
+    roomHumidity: number
+    timestamp: number
+    light: { 
+        visible: number
+        ultraviolet: number
+        infrared: number
+        isOn: boolean 
+    }
+    hasWater: boolean
+    isWatering: boolean
+    plants: {
+        name: string
+        soilTemp: number
+        soilMoisture: number
+        image?: string
+    }[]
+}
+
+async function transform(input: Data): Promise<Data> {
+    return {...input, plants: await Promise.all(input.plants.map(async (plant, idx) => {
+        await writeTXT(`plant-${idx}`, plant.image ?? "")
+        return ({
+            ...plant, image: undefined
+        })
+    }))}
+}
+
 (async function () {
     const filename = Deno.args[0]
     const content = await readJSON('data.json')
@@ -83,12 +112,12 @@ async function computeSignature(data: string, key: CryptoKey): Promise<SignedReq
         }, 120000)
 
         ws.onmessage = (async ({ data }) => {
-            const msg = SocketMessage.fromBuffer(await (data as Blob).arrayBuffer()).payload
+            const msg = SocketMessage.fromBuffer(await (data as Blob).arrayBuffer()).payload as unknown as Data
             clearTimeout(id);
             console.log("Found...")
-            console.log(msg)
-            writeJSON(filename, msg)
-            writeJSON("other.json", {"test": 12})
+            const transformed = await transform(msg)
+            console.log(transformed)
+            writeJSON(filename, transformed)
             ws.close()
         })
     })
