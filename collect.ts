@@ -1,5 +1,5 @@
 import { SocketMessage } from "https://raw.githubusercontent.com/duart38/serverless-sockets/main/src/mod.ts";
-import { writeJSON } from "https://deno.land/x/flat@0.0.15/mod.ts"
+import { readJSON, writeJSON } from "https://deno.land/x/flat@0.0.15/mod.ts"
 
 type Signed = {
     signature: number[],
@@ -64,6 +64,7 @@ async function computeSignature(data: string, key: CryptoKey): Promise<SignedReq
 
 (async function () {
     const filename = Deno.args[0]
+    const content = await readJSON(filename)
     const message = "signature"
 
     const key = await importSigningKey(Deno.env.get('COLLECTOR_KEY') || "")
@@ -74,7 +75,12 @@ async function computeSignature(data: string, key: CryptoKey): Promise<SignedReq
     ws.onopen = (_ => {
         ws.send(encoded)
 
-        setTimeout(() => ws.close(), 57500)
+        setTimeout(() => {
+            console.log('Timeout...')
+            console.log(content)
+            writeJSON(filename, content)
+            ws.close()
+        }, 57500)
 
         ws.onmessage = (async ({ data }) => {
             const msg = SocketMessage.fromBuffer(await (data as Blob).arrayBuffer()).payload
