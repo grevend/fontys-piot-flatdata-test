@@ -17,12 +17,17 @@ jobs:
     runs-on: ubuntu-latest
     environment: collection
     steps:
-      - name: Setup deno
+      - name: Check out repo
+        uses: actions/checkout@v3
+      - name: Setup deno 1.26.x
         uses: denoland/setup-deno@main
         with:
           deno-version: v1.26.x
-      - name: Check out repo
-        uses: actions/checkout@v3
+      - name: Setup Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - run: npm i -g @squoosh/cli
       - name: Fetch data
         uses: githubocto/flat@v3
         with:
