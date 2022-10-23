@@ -1,6 +1,6 @@
 import { SocketMessage } from "https://raw.githubusercontent.com/duart38/serverless-sockets/main/src/mod.ts";
 import { readJSON, writeImage, writeJSON } from "https://deno.land/x/flat@0.0.15/mod.ts"
-import { decode } from "https://deno.land/std/encoding/base64.ts"
+import { decode } from "https://deno.land/std@0.160.0/encoding/base64.ts"
 
 type Signed = {
     signature: number[],
@@ -116,7 +116,7 @@ async function transform(input: Data): Promise<Collected> {
         const id = setTimeout(() => {
             console.log('Timeout...')
             console.log(content)
-            writeJSON(filename, content, null, "\t")
+            writeJSON(filename, content, null, 2)
             ws.close()
         }, 120000)
 
@@ -126,7 +126,7 @@ async function transform(input: Data): Promise<Collected> {
             console.log("Found...")
             const transformed = await transform(msg)
             console.log(transformed)
-            writeJSON(filename, transformed, null, "\t")
+            writeJSON(filename, transformed, null, 2)
             ws.close()
         })
     })
