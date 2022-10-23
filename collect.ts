@@ -95,6 +95,7 @@ async function transform(input: Data): Promise<Collected> {
         if(plant.image !== undefined) {
             await writeImage(decode(plant.image.replace(/^data:image\/png;base64,/, "")), `plant-${idx + 1}.png`)
             await exec(`squoosh-cli --max-optimizer-rounds 10 --webp {quality:70} plant-${idx + 1}.png`)
+            await exec(`squoosh-cli --max-optimizer-rounds 10 --avif {cqLevel:40} plant-${idx + 1}.png`)
         }
         return ({
             ...plant, image: undefined
