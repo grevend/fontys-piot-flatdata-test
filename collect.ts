@@ -1,5 +1,6 @@
 import { SocketMessage } from "https://raw.githubusercontent.com/duart38/serverless-sockets/main/src/mod.ts";
 import { readJSON, writeImage, writeJSON } from "https://deno.land/x/flat@0.0.15/mod.ts"
+import { decode } from "https://deno.land/std/encoding/base64.ts"
 
 type Signed = {
     signature: number[],
@@ -85,7 +86,7 @@ interface Data {
 async function transform(input: Data): Promise<Data> {
     return {...input, plants: await Promise.all(input.plants.map(async (plant, idx) => {
         if(plant.image !== undefined) {
-            await writeImage(Uint8Array.from(plant.image, c => c.charCodeAt(0)), `plant-${idx}.jpg`)
+            await writeImage(decode(plant.image.replace(/^data:image\/png;base64,/, "")), `plant-${idx}.png`)
         }
         return ({
             ...plant, image: undefined
