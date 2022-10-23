@@ -85,7 +85,7 @@ interface Data {
 async function transform(input: Data): Promise<Data> {
     return {...input, plants: await Promise.all(input.plants.map(async (plant, idx) => {
         if(plant.image !== undefined) {
-            await writeImage(Uint8Array.from(atob(plant.image), c => c.charCodeAt(0)), `plant-${idx}.jpg`)
+            await writeImage(Uint8Array.from(plant.image, c => c.charCodeAt(0)), `plant-${idx}.jpg`)
         }
         return ({
             ...plant, image: undefined
