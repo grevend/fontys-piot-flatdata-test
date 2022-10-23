@@ -1,1 +1,25 @@
-{"roomTemp":24.7,"roomHumidity":89,"timestamp":1666538769,"light":{"visible":0,"ultraviolet":0,"infrared":0,"isOn":false},"hasWater":false,"isWatering":false,"plants":[{"name":"Peper Anaheim","soilTemp":85,"soilMoisture":448},{"name":"Peper Anaheim","soilTemp":23.625,"soilMoisture":521}],"signature":[],"sigMsg":"","deviceId":"154923755538709673782532167036210954247641516341051662899457786","to":"21233702881147800900313460702648388142641585827661665922239676"}
+{
+	"roomTemp": 24.6,
+	"roomHumidity": 89,
+	"timestamp": 1666539649,
+	"light": {
+		"visible": 0,
+		"ultraviolet": 0,
+		"infrared": 3,
+		"isOn": false
+	},
+	"hasWater": false,
+	"isWatering": false,
+	"plants": [
+		{
+			"name": "Peper Anaheim",
+			"soilTemp": 85,
+			"soilMoisture": 451
+		},
+		{
+			"name": "Peper Anaheim",
+			"soilTemp": 23.6875,
+			"soilMoisture": 521
+		}
+	]
+}
