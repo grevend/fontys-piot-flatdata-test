@@ -80,10 +80,11 @@ async function computeSignature(data: string, key: CryptoKey): Promise<SignedReq
             console.log(content)
             writeJSON(filename, content)
             ws.close()
-        }, 57500)
+        }, 120000)
 
         ws.onmessage = (async ({ data }) => {
             const msg = SocketMessage.fromBuffer(await (data as Blob).arrayBuffer()).payload
+            console.log("Found...")
             console.log(msg)
             writeJSON(filename, msg)
             ws.close()
