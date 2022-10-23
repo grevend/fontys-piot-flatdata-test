@@ -94,8 +94,8 @@ async function transform(input: Data): Promise<Collected> {
     return {...input, plants: await Promise.all(input.plants.map(async (plant, idx) => {
         if(plant.image !== undefined) {
             await writeImage(decode(plant.image.replace(/^data:image\/png;base64,/, "")), `plant-${idx + 1}.png`)
-            await exec(`squoosh-cli --max-optimizer-rounds 10 --optimizer-butteraugli-target 3 --webp auto plant-${idx + 1}.png`)
-            await exec(`squoosh-cli --max-optimizer-rounds 10 --optimizer-butteraugli-target 3 --avif auto plant-${idx + 1}.png`)
+            await exec(`squoosh-cli --max-optimizer-rounds 10 --optimizer-butteraugli-target 5 --webp auto plant-${idx + 1}.png`)
+            await exec(`squoosh-cli --max-optimizer-rounds 10 --optimizer-butteraugli-target 5 --avif auto plant-${idx + 1}.png`)
         }
         return ({
             ...plant, image: undefined
