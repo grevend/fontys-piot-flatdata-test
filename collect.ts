@@ -81,9 +81,15 @@ interface Data {
         soilMoisture: number
         image?: string
     }[]
+    signature: []
+    sigMsg: string
+    deviceId: string
+    to: string
 }
 
-async function transform(input: Data): Promise<Data> {
+type Collected = Omit<Data, "signature" | "sigMsg" | "deviceId" | "to">
+
+async function transform(input: Data): Promise<Collected> {
     return {...input, plants: await Promise.all(input.plants.map(async (plant, idx) => {
         if(plant.image !== undefined) {
             await writeImage(decode(plant.image.replace(/^data:image\/png;base64,/, "")), `plant-${idx}.png`)
@@ -91,7 +97,7 @@ async function transform(input: Data): Promise<Data> {
         return ({
             ...plant, image: undefined
         })
-    }))}
+    })), signature: undefined, sigMsg: undefined, deviceId: undefined, to: undefined} as unknown as Collected
 }
 
 (async function () {
@@ -110,7 +116,7 @@ async function transform(input: Data): Promise<Data> {
         const id = setTimeout(() => {
             console.log('Timeout...')
             console.log(content)
-            writeJSON(filename, content)
+            writeJSON(filename, content, null, "\t")
             ws.close()
         }, 120000)
 
@@ -120,7 +126,7 @@ async function transform(input: Data): Promise<Data> {
             console.log("Found...")
             const transformed = await transform(msg)
             console.log(transformed)
-            writeJSON(filename, transformed)
+            writeJSON(filename, transformed, null, "\t")
             ws.close()
         })
     })
