@@ -88,6 +88,7 @@ async function computeSignature(data: string, key: CryptoKey): Promise<SignedReq
             console.log("Found...")
             console.log(msg)
             writeJSON(filename, msg)
+            writeJSON("other.json", {"test": 12})
             ws.close()
         })
     })
