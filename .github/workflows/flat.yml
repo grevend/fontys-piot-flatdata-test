@@ -31,6 +31,6 @@ jobs:
       - name: Fetch data
         uses: githubocto/flat@v3
         with:
-          http_url: 'https://raw.githubusercontent.com/grevend/fontys-piot-flatdata-test/main/.github/placeholder/empty.json'
+          http_url: 'https://raw.githubusercontent.com/grevend/fontys-piot-flatdata-test/main/data.json'
           downloaded_filename: 'data.json'
           postprocess: 'collect.ts'

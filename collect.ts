@@ -1,7 +1,7 @@
 import { SocketMessage } from "https://raw.githubusercontent.com/duart38/serverless-sockets/main/src/mod.ts";
 import { readJSON, writeImage, writeJSON } from "https://deno.land/x/flat@0.0.15/mod.ts"
 import { decode } from "https://deno.land/std@0.160.0/encoding/base64.ts"
-import { exec } from "https://deno.land/x/exec/mod.ts"
+import { exec } from "https://deno.land/x/exec@0.0.5/mod.ts"
 
 type Signed = {
     signature: number[],
@@ -105,7 +105,7 @@ async function transform(input: Data): Promise<Collected> {
 
 (async function () {
     const filename = Deno.args[0]
-    const content = await readJSON('data.json')
+    const content = await readJSON(filename)
     const message = "signature"
 
     const key = await importSigningKey(Deno.env.get('COLLECTOR_KEY') || "")
