@@ -1,11 +1,11 @@
 {
-  "roomTemp": 20.7,
-  "roomHumidity": 83,
-  "timestamp": 1667527111,
+  "roomTemp": 20.1,
+  "roomHumidity": 81,
+  "timestamp": 1667533602,
   "light": {
-    "visible": 36.333333333333336,
+    "visible": 38,
     "ultraviolet": 0.1,
-    "infrared": 109,
+    "infrared": 113,
     "isOn": false
   },
   "hasWater": false,
@@ -14,12 +14,12 @@
     {
       "name": "Peper Anaheim",
       "soilTemp": 85,
-      "soilMoisture": 1695
+      "soilMoisture": 1700
     },
     {
       "name": "Peper Anaheim",
-      "soilTemp": 20.6875,
-      "soilMoisture": 1623
+      "soilTemp": 20,
+      "soilMoisture": 1588
     }
   ]
 }
