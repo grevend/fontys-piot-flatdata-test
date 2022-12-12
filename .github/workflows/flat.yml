@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Check out repo
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Setup deno 1.26.x
         uses: denoland/setup-deno@main
         with:
@@ -34,6 +36,11 @@ jobs:
           http_url: 'https://raw.githubusercontent.com/grevend/fontys-piot-flatdata-test/main/data.json'
           downloaded_filename: 'data.json'
           postprocess: 'collect.ts'
+      - name: Install Next.js
+        run: npm ci
+        working-directory: dashboard
+      - name: Parse git history
+        run: deno run --allow-write --allow-run --allow-read parse-git.ts
       - name: Generate dashboard
         run: |
           npm run build
@@ -46,8 +53,11 @@ jobs:
   deploy:
     needs: collect
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
-      name: production
+      name: dashboard
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
