@@ -34,6 +34,9 @@ jobs:
           http_url: 'https://raw.githubusercontent.com/grevend/fontys-piot-flatdata-test/main/data.json'
           downloaded_filename: 'data.json'
           postprocess: 'collect.ts'
+      - name: Install Next.js
+        run: npm ci
+        working-directory: dashboard
       - name: Generate dashboard
         run: |
           npm run build
