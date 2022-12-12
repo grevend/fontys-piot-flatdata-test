@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Check out repo
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Setup deno 1.26.x
         uses: denoland/setup-deno@main
         with:
@@ -56,7 +58,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
-        id: dashboard
+        id: deployment
         uses: actions/deploy-pages@v1
 
 
