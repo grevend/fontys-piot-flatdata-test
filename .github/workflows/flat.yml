@@ -39,6 +39,11 @@ jobs:
       - name: Install Next.js
         run: npm ci
         working-directory: dashboard
+      - name: Cache history snapshots
+        uses: actions/cache@v3
+        with:
+          path: snapshots
+          key: ${{ runner.os }}-data-snapshots
       - name: Parse git history
         run: deno run --allow-write --allow-run --allow-read parse-git.ts
       - name: Manage Next.js cache
