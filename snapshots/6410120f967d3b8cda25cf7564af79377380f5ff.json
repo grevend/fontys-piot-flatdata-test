@@ -1,0 +1,28 @@
+{
+  "commit": "6410120f967d3b8cda25cf7564af79377380f5ff",
+  "data": {
+    "roomTemp": 19.3,
+     "roomHumidity": 93,
+     "timestamp": 1670847090,
+     "light": {
+       "visible": 16.333333333333332,
+       "ultraviolet": 0.1,
+       "infrared": 44,
+       "isOn": true
+     },
+     "hasWater": false,
+     "isWatering": false,
+     "plants": [
+       {
+         "name": "Peper Anaheim",
+         "soilTemp": 85,
+         "soilMoisture": 1919
+       },
+       {
+         "name": "Peper Anaheim",
+         "soilTemp": 18.4375,
+         "soilMoisture": 1794
+       }
+     ]
+  }
+}
