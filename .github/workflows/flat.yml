@@ -41,6 +41,15 @@ jobs:
         working-directory: dashboard
       - name: Parse git history
         run: deno run --allow-write --allow-run --allow-read parse-git.ts
+      - name: Manage Next.js cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.npm
+            ${{ github.workspace }}/dashboard/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
       - name: Generate dashboard
         run: |
           npm run build
