@@ -37,6 +37,8 @@ jobs:
       - name: Install Next.js
         run: npm ci
         working-directory: dashboard
+      - name: Parse git history
+        run: deno run --allow-write --allow-run --allow-read parse-git.ts
       - name: Generate dashboard
         run: |
           npm run build
@@ -50,11 +52,11 @@ jobs:
     needs: collect
     runs-on: ubuntu-latest
     environment:
-      name: production
+      name: dashboard
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
-        id: deployment
+        id: dashboard
         uses: actions/deploy-pages@v1
 
 
