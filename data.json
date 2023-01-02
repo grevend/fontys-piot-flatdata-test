@@ -1,11 +1,11 @@
 {
-  "roomTemp": 21.2,
-  "roomHumidity": 84,
-  "timestamp": 1672596398,
+  "roomTemp": 22.1,
+  "roomHumidity": 89,
+  "timestamp": 1672619749,
   "light": {
-    "visible": 159.33,
+    "visible": 15.33,
     "ultraviolet": 0.1,
-    "infrared": 479,
+    "infrared": 46,
     "isOn": true
   },
   "hasWater": false,
@@ -13,13 +13,13 @@
   "plants": [
     {
       "name": "Peper Anaheim",
-      "soilTemp": 22.38,
-      "soilMoisture": 1661
+      "soilTemp": 23.19,
+      "soilMoisture": 1675
     },
     {
       "name": "Ocimum Basillicum",
-      "soilTemp": 22.06,
-      "soilMoisture": 1641
+      "soilTemp": 23,
+      "soilMoisture": 1645
     }
   ]
 }
